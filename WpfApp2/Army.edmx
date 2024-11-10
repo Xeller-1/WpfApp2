@@ -1,0 +1,377 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="Хранилище MillitaryModel" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Equipment">
+          <Key>
+            <PropertyRef Name="Equipment_ID" />
+          </Key>
+          <Property Name="Equipment_ID" Type="int" Nullable="false" />
+          <Property Name="Unit_ID" Type="int" />
+          <Property Name="Equipment_Name" Type="varchar" MaxLength="100" />
+          <Property Name="Specifications" Type="text" />
+        </EntityType>
+        <EntityType Name="Location">
+          <Key>
+            <PropertyRef Name="Location_ID" />
+          </Key>
+          <Property Name="Location_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Country" Type="varchar" MaxLength="100" />
+          <Property Name="City" Type="varchar" MaxLength="100" />
+          <Property Name="Address" Type="varchar" MaxLength="255" />
+          <Property Name="Area" Type="decimal" Precision="10" Scale="2" />
+          <Property Name="Building_Count" Type="int" />
+        </EntityType>
+        <EntityType Name="Military_Branch">
+          <Key>
+            <PropertyRef Name="Branch_ID" />
+          </Key>
+          <Property Name="Branch_ID" Type="int" Nullable="false" />
+          <Property Name="Branch_Name" Type="varchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
+        <EntityType Name="Units">
+          <Key>
+            <PropertyRef Name="Unit_ID" />
+          </Key>
+          <Property Name="Unit_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Unit_Number" Type="varchar" MaxLength="50" />
+          <Property Name="Location_ID" Type="int" />
+          <Property Name="Branch_ID" Type="int" />
+          <Property Name="Company_Count" Type="int" />
+          <Property Name="Equipment_Count" Type="int" />
+          <Property Name="Weapon_Count" Type="int" />
+          <Property Name="UnitPhoto" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="Weapons">
+          <Key>
+            <PropertyRef Name="Weapon_ID" />
+          </Key>
+          <Property Name="Weapon_ID" Type="int" Nullable="false" />
+          <Property Name="Weapon_Name" Type="varchar" MaxLength="100" />
+          <Property Name="Unit_ID" Type="int" />
+          <Property Name="Specifications" Type="text" />
+        </EntityType>
+        <Association Name="FK__Equipment__Unit___3F466844">
+          <End Role="Units" Type="Self.Units" Multiplicity="0..1" />
+          <End Role="Equipment" Type="Self.Equipment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Units">
+              <PropertyRef Name="Unit_ID" />
+            </Principal>
+            <Dependent Role="Equipment">
+              <PropertyRef Name="Unit_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Units__Branch_ID__3C69FB99">
+          <End Role="Military_Branch" Type="Self.Military_Branch" Multiplicity="0..1" />
+          <End Role="Units" Type="Self.Units" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Military_Branch">
+              <PropertyRef Name="Branch_ID" />
+            </Principal>
+            <Dependent Role="Units">
+              <PropertyRef Name="Branch_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Units__Location___3B75D760">
+          <End Role="Location" Type="Self.Location" Multiplicity="0..1" />
+          <End Role="Units" Type="Self.Units" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Location">
+              <PropertyRef Name="Location_ID" />
+            </Principal>
+            <Dependent Role="Units">
+              <PropertyRef Name="Location_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Weapons__Unit_ID__4222D4EF">
+          <End Role="Units" Type="Self.Units" Multiplicity="0..1" />
+          <End Role="Weapons" Type="Self.Weapons" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Units">
+              <PropertyRef Name="Unit_ID" />
+            </Principal>
+            <Dependent Role="Weapons">
+              <PropertyRef Name="Unit_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Хранилище MillitaryModelContainer">
+          <EntitySet Name="Equipment" EntityType="Self.Equipment" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Location" EntityType="Self.Location" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Military_Branch" EntityType="Self.Military_Branch" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Units" EntityType="Self.Units" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Weapons" EntityType="Self.Weapons" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__Equipment__Unit___3F466844" Association="Self.FK__Equipment__Unit___3F466844">
+            <End Role="Units" EntitySet="Units" />
+            <End Role="Equipment" EntitySet="Equipment" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Units__Branch_ID__3C69FB99" Association="Self.FK__Units__Branch_ID__3C69FB99">
+            <End Role="Military_Branch" EntitySet="Military_Branch" />
+            <End Role="Units" EntitySet="Units" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Units__Location___3B75D760" Association="Self.FK__Units__Location___3B75D760">
+            <End Role="Location" EntitySet="Location" />
+            <End Role="Units" EntitySet="Units" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Weapons__Unit_ID__4222D4EF" Association="Self.FK__Weapons__Unit_ID__4222D4EF">
+            <End Role="Units" EntitySet="Units" />
+            <End Role="Weapons" EntitySet="Weapons" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="MillitaryModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Equipment">
+          <Key>
+            <PropertyRef Name="Equipment_ID" />
+          </Key>
+          <Property Name="Equipment_ID" Type="Int32" Nullable="false" />
+          <Property Name="Unit_ID" Type="Int32" />
+          <Property Name="Equipment_Name" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Specifications" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Units" Relationship="Self.FK__Equipment__Unit___3F466844" FromRole="Equipment" ToRole="Units" />
+        </EntityType>
+        <EntityType Name="Location">
+          <Key>
+            <PropertyRef Name="Location_ID" />
+          </Key>
+          <Property Name="Location_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Country" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="City" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Address" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="Area" Type="Decimal" Precision="10" Scale="2" />
+          <Property Name="Building_Count" Type="Int32" />
+          <NavigationProperty Name="Units" Relationship="Self.FK__Units__Location___3B75D760" FromRole="Location" ToRole="Units" />
+        </EntityType>
+        <EntityType Name="Military_Branch">
+          <Key>
+            <PropertyRef Name="Branch_ID" />
+          </Key>
+          <Property Name="Branch_ID" Type="Int32" Nullable="false" />
+          <Property Name="Branch_Name" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Units" Relationship="Self.FK__Units__Branch_ID__3C69FB99" FromRole="Military_Branch" ToRole="Units" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="Units">
+          <Key>
+            <PropertyRef Name="Unit_ID" />
+          </Key>
+          <Property Name="Unit_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Unit_Number" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Location_ID" Type="Int32" />
+          <Property Name="Branch_ID" Type="Int32" />
+          <Property Name="Company_Count" Type="Int32" />
+          <Property Name="Equipment_Count" Type="Int32" />
+          <Property Name="Weapon_Count" Type="Int32" />
+          <Property Name="UnitPhoto" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Equipment" Relationship="Self.FK__Equipment__Unit___3F466844" FromRole="Units" ToRole="Equipment" />
+          <NavigationProperty Name="Location" Relationship="Self.FK__Units__Location___3B75D760" FromRole="Units" ToRole="Location" />
+          <NavigationProperty Name="Military_Branch" Relationship="Self.FK__Units__Branch_ID__3C69FB99" FromRole="Units" ToRole="Military_Branch" />
+          <NavigationProperty Name="Weapons" Relationship="Self.FK__Weapons__Unit_ID__4222D4EF" FromRole="Units" ToRole="Weapons" />
+        </EntityType>
+        <EntityType Name="Weapons">
+          <Key>
+            <PropertyRef Name="Weapon_ID" />
+          </Key>
+          <Property Name="Weapon_ID" Type="Int32" Nullable="false" />
+          <Property Name="Weapon_Name" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Unit_ID" Type="Int32" />
+          <Property Name="Specifications" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Units" Relationship="Self.FK__Weapons__Unit_ID__4222D4EF" FromRole="Weapons" ToRole="Units" />
+        </EntityType>
+        <Association Name="FK__Equipment__Unit___3F466844">
+          <End Role="Units" Type="Self.Units" Multiplicity="0..1" />
+          <End Role="Equipment" Type="Self.Equipment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Units">
+              <PropertyRef Name="Unit_ID" />
+            </Principal>
+            <Dependent Role="Equipment">
+              <PropertyRef Name="Unit_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Units__Location___3B75D760">
+          <End Role="Location" Type="Self.Location" Multiplicity="0..1" />
+          <End Role="Units" Type="Self.Units" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Location">
+              <PropertyRef Name="Location_ID" />
+            </Principal>
+            <Dependent Role="Units">
+              <PropertyRef Name="Location_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Units__Branch_ID__3C69FB99">
+          <End Role="Military_Branch" Type="Self.Military_Branch" Multiplicity="0..1" />
+          <End Role="Units" Type="Self.Units" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Military_Branch">
+              <PropertyRef Name="Branch_ID" />
+            </Principal>
+            <Dependent Role="Units">
+              <PropertyRef Name="Branch_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Weapons__Unit_ID__4222D4EF">
+          <End Role="Units" Type="Self.Units" Multiplicity="0..1" />
+          <End Role="Weapons" Type="Self.Weapons" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Units">
+              <PropertyRef Name="Unit_ID" />
+            </Principal>
+            <Dependent Role="Weapons">
+              <PropertyRef Name="Unit_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="MillitaryEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Equipment" EntityType="Self.Equipment" />
+          <EntitySet Name="Location" EntityType="Self.Location" />
+          <EntitySet Name="Military_Branch" EntityType="Self.Military_Branch" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
+          <EntitySet Name="Units" EntityType="Self.Units" />
+          <EntitySet Name="Weapons" EntityType="Self.Weapons" />
+          <AssociationSet Name="FK__Equipment__Unit___3F466844" Association="Self.FK__Equipment__Unit___3F466844">
+            <End Role="Units" EntitySet="Units" />
+            <End Role="Equipment" EntitySet="Equipment" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Units__Location___3B75D760" Association="Self.FK__Units__Location___3B75D760">
+            <End Role="Location" EntitySet="Location" />
+            <End Role="Units" EntitySet="Units" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Units__Branch_ID__3C69FB99" Association="Self.FK__Units__Branch_ID__3C69FB99">
+            <End Role="Military_Branch" EntitySet="Military_Branch" />
+            <End Role="Units" EntitySet="Units" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Weapons__Unit_ID__4222D4EF" Association="Self.FK__Weapons__Unit_ID__4222D4EF">
+            <End Role="Units" EntitySet="Units" />
+            <End Role="Weapons" EntitySet="Weapons" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="Хранилище MillitaryModelContainer" CdmEntityContainer="MillitaryEntities">
+          <EntitySetMapping Name="Equipment">
+            <EntityTypeMapping TypeName="MillitaryModel.Equipment">
+              <MappingFragment StoreEntitySet="Equipment">
+                <ScalarProperty Name="Equipment_ID" ColumnName="Equipment_ID" />
+                <ScalarProperty Name="Unit_ID" ColumnName="Unit_ID" />
+                <ScalarProperty Name="Equipment_Name" ColumnName="Equipment_Name" />
+                <ScalarProperty Name="Specifications" ColumnName="Specifications" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Location">
+            <EntityTypeMapping TypeName="MillitaryModel.Location">
+              <MappingFragment StoreEntitySet="Location">
+                <ScalarProperty Name="Location_ID" ColumnName="Location_ID" />
+                <ScalarProperty Name="Country" ColumnName="Country" />
+                <ScalarProperty Name="City" ColumnName="City" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="Area" ColumnName="Area" />
+                <ScalarProperty Name="Building_Count" ColumnName="Building_Count" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Military_Branch">
+            <EntityTypeMapping TypeName="MillitaryModel.Military_Branch">
+              <MappingFragment StoreEntitySet="Military_Branch">
+                <ScalarProperty Name="Branch_ID" ColumnName="Branch_ID" />
+                <ScalarProperty Name="Branch_Name" ColumnName="Branch_Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="MillitaryModel.sysdiagrams">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Units">
+            <EntityTypeMapping TypeName="MillitaryModel.Units">
+              <MappingFragment StoreEntitySet="Units">
+                <ScalarProperty Name="Unit_ID" ColumnName="Unit_ID" />
+                <ScalarProperty Name="Unit_Number" ColumnName="Unit_Number" />
+                <ScalarProperty Name="Location_ID" ColumnName="Location_ID" />
+                <ScalarProperty Name="Branch_ID" ColumnName="Branch_ID" />
+                <ScalarProperty Name="Company_Count" ColumnName="Company_Count" />
+                <ScalarProperty Name="Equipment_Count" ColumnName="Equipment_Count" />
+                <ScalarProperty Name="Weapon_Count" ColumnName="Weapon_Count" />
+                <ScalarProperty Name="UnitPhoto" ColumnName="UnitPhoto" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Weapons">
+            <EntityTypeMapping TypeName="MillitaryModel.Weapons">
+              <MappingFragment StoreEntitySet="Weapons">
+                <ScalarProperty Name="Weapon_ID" ColumnName="Weapon_ID" />
+                <ScalarProperty Name="Weapon_Name" ColumnName="Weapon_Name" />
+                <ScalarProperty Name="Unit_ID" ColumnName="Unit_ID" />
+                <ScalarProperty Name="Specifications" ColumnName="Specifications" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Нет" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

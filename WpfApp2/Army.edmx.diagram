@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="dc59181fe63f452f8400f83aeb44eaa3" Name="Diagram1">
+        <EntityTypeShape EntityType="MillitaryModel.Equipment" Width="1.5" PointX="5.25" PointY="2.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="MillitaryModel.Location" Width="1.5" PointX="0.75" PointY="3.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="MillitaryModel.Military_Branch" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="MillitaryModel.sysdiagrams" Width="1.5" PointX="0.75" PointY="7.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="MillitaryModel.Units" Width="1.5" PointX="3" PointY="2.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="MillitaryModel.Weapons" Width="1.5" PointX="5.25" PointY="4.875" IsExpanded="true" />
+        <AssociationConnector Association="MillitaryModel.FK__Equipment__Unit___3F466844" ManuallyRouted="false" />
+        <AssociationConnector Association="MillitaryModel.FK__Units__Location___3B75D760" ManuallyRouted="false" />
+        <AssociationConnector Association="MillitaryModel.FK__Units__Branch_ID__3C69FB99" ManuallyRouted="false" />
+        <AssociationConnector Association="MillitaryModel.FK__Weapons__Unit_ID__4222D4EF" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
