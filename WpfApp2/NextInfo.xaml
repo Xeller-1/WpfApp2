@@ -1,0 +1,57 @@
+﻿<Page x:Class="WpfApp2.NextInfo"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:WpfApp2"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="NextInfo" IsVisibleChanged ="Page_IsVisibleChanged">
+
+    <Grid Background="#F0F4F8">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <Button Name="AddWeapons" Content="Добавить вооружение" Grid.Row="1"  Click="AddWeapons_Click" Height="20"  HorizontalAlignment="Left" Margin="10 0 0 1"
+                Background="LightGreen"/>
+        <Button Name="AddEquipment" Content="Добавить вооружение" Grid.Row="1" Grid.Column="2" Click="AddEquipment_Click" Height="20"  HorizontalAlignment="Left" Margin="10 0 0 1"
+          Background="LightGreen"/>
+
+
+
+        <!-- Заголовок страницы -->
+        <TextBlock Text="Детали Вооружения и Техники" 
+                   FontSize="24" 
+                   FontWeight="Bold" 
+                   HorizontalAlignment="Center" 
+                   Margin="0,0,0,20"  Grid.ColumnSpan="2"/>
+
+        <!-- Список типов вооружения и техники с описанием -->
+        <ListView Name="DataListView" Grid.Row="2" Margin="0,0,0,20">
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn Header="Тип Вооружения" Width="150" DisplayMemberBinding="{Binding Weapon_Name}" />
+                    <GridViewColumn Header="Описание Вооружения" Width="250" DisplayMemberBinding="{Binding  Weapon_Specifications}" />
+                </GridView>
+            </ListView.View>
+        </ListView>
+
+        <ListView Name="DataListViewEquipment" Grid.Row="2" Grid.Column="1" Margin="0,0,0,20">
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn Header="Тип Техники" Width="150" DisplayMemberBinding="{Binding Equipment_Name}" />
+                    <GridViewColumn Header="Описание Техники" Width="250" DisplayMemberBinding="{Binding Equipment_Specifications}" />
+                </GridView>
+            </ListView.View>
+        </ListView>
+
+
+    </Grid>
+</Page>

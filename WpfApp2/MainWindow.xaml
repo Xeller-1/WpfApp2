@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WpfApp2"
         mc:Ignorable="d"
-        Title="Army" FontFamily=" Century Gothic" Icon="image/army.ico" Height="450" Width="800" MinHeight="150" MinWidth="300">
+        Title="Army" FontFamily=" Century Gothic" Icon="image/army.ico" Height="1100" Width="1200" MinHeight="150" MinWidth="300">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="75"/>
@@ -13,9 +13,9 @@
             <RowDefinition Height="30"/>
         </Grid.RowDefinitions>
         <Image Source="image/millitary1.jpg" HorizontalAlignment="Left"></Image>
-        <TextBlock Text="Части" FontSize="30" HorizontalAlignment="Center" VerticalAlignment="Center"></TextBlock>
+        <TextBlock Text="Военные Части" FontSize="30" HorizontalAlignment="Center" VerticalAlignment="Center"></TextBlock>
         <Frame Grid.Row="1" Name="MainFrame" ContentRendered="MainFrame_ContentRendered" NavigationUIVisibility="Hidden"></Frame>
-        <Button Content="Back" Name="BtnBack" Width="175" Height="30" HorizontalAlignment="Right" Margin="5"
+        <Button Content="Назад" Name="BtnBack" Width="175" Height="30" HorizontalAlignment="Right" Margin="5"
                 Click="BtnBack_Click"></Button>
     </Grid>
 </Window>

@@ -8,7 +8,46 @@
       d:DesignHeight="450" d:DesignWidth="800"
       Title="AddUnitPage">
 
+    <Page.Resources>
+        <!-- Общий стиль для текстовых полей -->
+        <Style x:Key="TextBoxStyle" TargetType="TextBox">
+            <Setter Property="FontSize" Value="25"/>
+            <Setter Property="Padding" Value="5"/>
+            <Setter Property="Margin" Value="0,5"/>
+            <Setter Property="Height" Value="50"/>
+            <Setter Property="BorderBrush" Value="#A9A9A9"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            
+        </Style>
+
+        <!-- Стиль для кнопок -->
+        <Style x:Key="ButtonStyle" TargetType="Button">
+            <Setter Property="FontSize" Value="16"/>
+            <Setter Property="Padding" Value="15"/>
+            <Setter Property="Margin" Value="20,10"/>
+            <Setter Property="Background" Value="#4CAF50"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="BorderBrush" Value="#388E3C"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            
+        </Style>
+
+        <!-- Стиль для заголовков -->
+        <Style x:Key="HeaderTextStyle" TargetType="TextBlock">
+            <Setter Property="FontSize" Value="16"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+        </Style>
+    </Page.Resources>
+
     <Grid Margin="30">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
@@ -18,58 +57,69 @@
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
+        
 
         <!-- Номер части -->
-        <StackPanel Grid.Row="0" Orientation="Horizontal" HorizontalAlignment="Left" Margin="0,5">
-            <TextBlock Text="Номер части:" FontSize="16" FontWeight="Bold" Width="150"/>
-            <TextBox Text="{Binding Unit_Number}" FontSize="16" Width="200"/>
+        <StackPanel Grid.Row="0" Grid.Column="0" Orientation="Horizontal" HorizontalAlignment="Left" Margin="0,5">
+            <TextBlock Text="Номер части:" Style="{StaticResource HeaderTextStyle}" Width="150"/>
+            <TextBox Text="{Binding Unit_Number}" Style="{StaticResource TextBoxStyle}" Width="200"/>
         </StackPanel>
 
         <!-- Страна -->
-        <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Left" Margin="0,5">
-            <TextBlock Text="Страна:" FontSize="14" Width="150"/>
-            <TextBox Text="{Binding Location.Country}" FontSize="14" Width="200"/>
+        <StackPanel Grid.Row="1" Grid.Column="0" Orientation="Horizontal" HorizontalAlignment="Left" Margin="0,5">
+            <TextBlock Text="Страна:" Style="{StaticResource HeaderTextStyle}" Width="150"/>
+            <TextBox Text="{Binding Location.Country}" Style="{StaticResource TextBoxStyle}" Width="200"/>
         </StackPanel>
 
         <!-- Город -->
-        <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Left" Margin="0,5">
-            <TextBlock Text="Город:" FontSize="14" Width="150"/>
-            <TextBox Text="{Binding Location.City}" FontSize="14" Width="200"/>
+        <StackPanel Grid.Row="2" Grid.Column="0" Orientation="Horizontal" HorizontalAlignment="Left" Margin="0,5">
+            <TextBlock Text="Город:" Style="{StaticResource HeaderTextStyle}" Width="150"/>
+            <TextBox Text="{Binding Location.City}" Style="{StaticResource TextBoxStyle}" Width="200"/>
         </StackPanel>
 
         <!-- Адрес -->
-        <StackPanel Grid.Row="3" Orientation="Horizontal" HorizontalAlignment="Left" Margin="0,5">
-            <TextBlock Text="Адрес:" FontSize="14" Width="150"/>
-            <TextBox Text="{Binding Location.Address}" FontSize="14" Width="200"/>
+        <StackPanel Grid.Row="3" Grid.Column="0" Orientation="Horizontal" HorizontalAlignment="Left" Margin="0,5">
+            <TextBlock Text="Адрес:" Style="{StaticResource HeaderTextStyle}" Width="150"/>
+            <TextBox Text="{Binding Location.Address}" Style="{StaticResource TextBoxStyle}" Width="200"/>
         </StackPanel>
 
-        <!-- Количество рот -->
-        <StackPanel Grid.Row="4" Orientation="Horizontal" HorizontalAlignment="Left" Margin="0,5">
-            <TextBlock Text="Количество рот:" FontSize="14" Width="150"/>
-            <TextBox Text="{Binding Company_Count}" FontSize="14" Width="200"/>
+        <!-- Вид войск -->
+        <StackPanel Grid.Row="4" Grid.Column="0" Orientation="Horizontal" HorizontalAlignment="Left" Margin="0,5">
+            <TextBlock Text="Вид войск:" Style="{StaticResource HeaderTextStyle}" Width="150"/>
+            <ComboBox Name="selectMilitaryBrach" SelectionChanged="selectMilitaryBrach_SelectionChanged" Width="200" Height="50" FontSize="20"></ComboBox>
+        </StackPanel>
+
+        <StackPanel Grid.Row="1" Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Left" Margin="0,5">
+            <TextBlock Text="Количество рот:" Style="{StaticResource HeaderTextStyle}" FontSize="14" Width="150"/>
+            <TextBox Text="{Binding Company_Count}" Style="{StaticResource TextBoxStyle}" Width="200" Height="60" AcceptsReturn="True" VerticalScrollBarVisibility="Auto"/>
         </StackPanel>
 
         <!-- Количество вооружения -->
-        <StackPanel Grid.Row="5" Orientation="Horizontal" HorizontalAlignment="Left" Margin="0,5">
-            <TextBlock Text="Количество вооружения:" FontSize="14" Width="150"/>
-            <TextBox Text="{Binding Weapon_Count}" FontSize="14" Width="200"/>
+        <StackPanel Grid.Row="2" Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Left" Margin="0,5">
+            <TextBlock Text="Количество вооружения:" Style="{StaticResource HeaderTextStyle}" FontSize="14" Width="150"/>
+            <TextBox Text="{Binding Weapon_Count}" Style="{StaticResource TextBoxStyle}" Width="200" Height="60" AcceptsReturn="True" VerticalScrollBarVisibility="Auto"/>
         </StackPanel>
 
         <!-- Количество техники -->
-        <StackPanel Grid.Row="6" Orientation="Horizontal" HorizontalAlignment="Left" Margin="0,5">
-            <TextBlock Text="Количество техники:" FontSize="14" Width="150"/>
-            <TextBox Text="{Binding Equipment_Count}" FontSize="14" Width="200"/>
+        <StackPanel Grid.Row="3" Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Left" Margin="0,5">
+            <TextBlock Text="Количество техники:" Style="{StaticResource HeaderTextStyle}" FontSize="14" Width="150"/>
+            <TextBox Text="{Binding Equipment_Count}" Style="{StaticResource TextBoxStyle}" Width="200" Height="60" AcceptsReturn="True" VerticalScrollBarVisibility="Auto"/>
         </StackPanel>
 
         <!-- Фото -->
-        <StackPanel Grid.Row="7" Orientation="Horizontal" HorizontalAlignment="Left" Margin="0,5">
-            <TextBlock Text="Фото:" FontSize="14" Width="150"/>
-            <Button Content="Выбрать файл" Click="SelectPhotoButton_Click"/>
+        <StackPanel Grid.Row="4" Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Left" Margin="0,5">
+            <TextBlock Text="Фото:" Style="{StaticResource HeaderTextStyle}" Width="150"/>
+            <Button Content="Выбрать файл" Style="{StaticResource ButtonStyle}" Click="SelectPhotoButton_Click"/>
             <Image Name="UnitImage" Width="100" Height="100" Margin="10,0,0,0"/>
         </StackPanel>
 
         <!-- Кнопка сохранить -->
-        <Button Content="Сохранить" Grid.Row="8" Click="SaveButton_Click" HorizontalAlignment="Center" Margin="0,10,0,0"/>
+        <Button Content="Сохранить" Style="{StaticResource ButtonStyle}" Grid.Row="10" Click="SaveButton_Click" HorizontalAlignment="Center" Margin="0,10,0,0"/>
     </Grid>
 </Page>

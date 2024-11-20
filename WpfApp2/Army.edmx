@@ -29,7 +29,7 @@
           <Key>
             <PropertyRef Name="Branch_ID" />
           </Key>
-          <Property Name="Branch_ID" Type="int" Nullable="false" />
+          <Property Name="Branch_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Branch_Name" Type="varchar" MaxLength="100" />
         </EntityType>
         <EntityType Name="sysdiagrams">
@@ -167,7 +167,7 @@
           <Key>
             <PropertyRef Name="Branch_ID" />
           </Key>
-          <Property Name="Branch_ID" Type="Int32" Nullable="false" />
+          <Property Name="Branch_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Branch_Name" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="Units" Relationship="Self.FK__Units__Branch_ID__3C69FB99" FromRole="Military_Branch" ToRole="Units" />
         </EntityType>

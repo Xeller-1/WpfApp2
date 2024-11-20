@@ -27,16 +27,23 @@ namespace WpfApp2
         public AddUnitPage(Units selectedUnit = null)
         {
             InitializeComponent();
-
+            selectMilitaryBrach.ItemsSource = MillitaryEntities.GetContext().Military_Branch.Select(f => f.Branch_Name).ToList();
             // Если передан выбранный объект, значит мы редактируем существующую единицу
             if (selectedUnit != null)
             {
                 _currentUnit = selectedUnit;
-
                 // Загружаем объект Location для выбранной единицы
                 _currentUnit.Location = MillitaryEntities.GetContext().Location
                     .FirstOrDefault(l => l.Location_ID == _currentUnit.Location_ID);
+                var currentEqi = MillitaryEntities.GetContext().Equipment.Where(f => f.Unit_ID == _currentUnit.Unit_ID).ToList();
+                selectMilitaryBrach.SelectedIndex = (int)(selectedUnit.Branch_ID - 1);
             }
+
+            var militaryBranches = MillitaryEntities.GetContext().Military_Branch.ToList();
+            
+
+            // Понимание структуры Military_Branch и правильный доступ к свойствам
+
 
             // Если Location не инициализировано, создаём новый объект Location
             if (_currentUnit.Location == null)
@@ -115,16 +122,19 @@ namespace WpfApp2
                 return;
             }
 
+
+            _currentUnit.Branch_ID = selectMilitaryBrach.SelectedIndex + 1;
             // Если это новая запись, добавляем в базу данных
             if (_currentUnit.Unit_ID == 0)
             {
                 MillitaryEntities.GetContext().Units.Add(_currentUnit);
+                
             }
             else
             {
                 // Если редактируем, обновляем данные в базе
                 MillitaryEntities.GetContext().Entry(_currentUnit).State = EntityState.Modified;
-            }
+            } 
 
             try
             {
@@ -140,7 +150,13 @@ namespace WpfApp2
                 MessageBox.Show($"Ошибка при сохранении: {ex.Message}");
             }
         }
+
+        private void selectMilitaryBrach_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
+        }
     }
+
 }
 
 

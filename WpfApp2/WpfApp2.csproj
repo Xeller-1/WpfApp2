@@ -66,8 +66,14 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="AddEquipment.xaml.cs">
+      <DependentUpon>AddEquipment.xaml</DependentUpon>
+    </Compile>
     <Compile Include="AddUnitPage.xaml.cs">
       <DependentUpon>AddUnitPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="AddWeapon.xaml.cs">
+      <DependentUpon>AddWeapon.xaml</DependentUpon>
     </Compile>
     <Compile Include="Army.Context.cs">
       <AutoGen>True</AutoGen>
@@ -84,12 +90,6 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Army.edmx</DependentUpon>
     </Compile>
-    <Compile Include="DetailsWindow.xaml.cs">
-      <DependentUpon>DetailsWindow.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="EditUnitWindow.xaml.cs">
-      <DependentUpon>EditUnitWindow.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Equipment.cs">
       <DependentUpon>Army.tt</DependentUpon>
     </Compile>
@@ -99,6 +99,9 @@
     <Compile Include="Manager.cs" />
     <Compile Include="Military_Branch.cs">
       <DependentUpon>Army.tt</DependentUpon>
+    </Compile>
+    <Compile Include="NextInfo.xaml.cs">
+      <DependentUpon>NextInfo.xaml</DependentUpon>
     </Compile>
     <Compile Include="sysdiagrams.cs">
       <DependentUpon>Army.tt</DependentUpon>
@@ -112,15 +115,15 @@
     <Compile Include="Weapons.cs">
       <DependentUpon>Army.tt</DependentUpon>
     </Compile>
+    <Page Include="AddEquipment.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="AddUnitPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="DetailsWindow.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="EditUnitWindow.xaml">
+    <Page Include="AddWeapon.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -136,6 +139,10 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="NextInfo.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="UnitPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
